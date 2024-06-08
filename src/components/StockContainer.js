@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Stock from "./Stock";
+import SearchBar from "./SearchBar";
 
-function StockContainer() {
-  const[stocks, setStocks] = useState([]);
+function StockContainer({stocks, onAddStock}) {
   
-  useEffect(() => {
-    fetch("http://localhost:3001/stocks")
-    .then(r => r.json())
-    .then(stocks => {{
-      setStocks(stocks)
-      console.log(stocks)
-    }})
-  }, []);
 
   const stockItem = stocks.map(stock => (
     <Stock 
       key = {stock.id}
-      name ={stock.name}
-      ticker = {stock.ticker}
-      price = {stock.price}
+      stock ={stock}
+      onStockClick={onAddStock}
     />
   ));
 
 
-  
 
   return (
     <div>
